@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasheeqa Sabreen Portfolio</title>
+
+    <style>
+        /* ---------- GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ✅ SCATTERED BUBBLES ALL DIRECTIONS - SLOW */
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #000;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle 25px at 15% 20%, rgba(120, 200, 255, 0.5) 0%, transparent 70%),
+                radial-gradient(circle 20px at 70% 60%, rgba(200, 120, 255, 0.5) 0%, transparent 70%);
+            background-repeat: repeat;
+            background-size: 250px 180px, 220px 160px;
+            animation: bubbleRight 25s linear infinite;
+            z-index: -2;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 200%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle 22px at 30% 30%, rgba(120, 255, 200, 0.5) 0%, transparent 70%),
+                radial-gradient(circle 28px at 80% 70%, rgba(255, 200, 120, 0.5) 0%, transparent 70%);
+            background-repeat: repeat;
+            background-size: 230px 170px, 260px 190px;
+            animation: bubbleLeft 30s linear infinite;
+            z-index: -1;
+            filter: drop-shadow(0 0 18px rgba(255, 255, 255, 1));
+        }
+
+        @keyframes bubbleRight {
+            0% {
+                transform: translateX(-100%) translateY(0px);
+            }
+
+            25% {
+                transform: translateX(0%) translateY(-20px);
+            }
+
+            50% {
+                transform: translateX(50%) translateY(0px);
+            }
+
+            75% {
+                transform: translateX(25%) translateY(20px);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(0px);
+            }
+        }
+
+        @keyframes bubbleLeft {
+            0% {
+                transform: translateX(100%) translateY(0px);
+            }
+
+            25% {
+                transform: translateX(50%) translateY(20px);
+            }
+
+            50% {
+                transform: translateX(0%) translateY(0px);
+            }
+
+            75% {
+                transform: translateX(75%) translateY(-20px);
+            }
+
+            100% {
+                transform: translateX(-100%) translateY(0px);
+            }
+        }
+
+        /* ---------- NAVBAR ---------- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0072ff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6ec4;
+            transform: scale(1.1);
+        }
+
+        /* ---------- RESUME BUTTON ---------- */
+        .resume-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #0072ff, #ff6ec4);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .resume-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 114, 255, 0.6);
+        }
+
+        /* ---------- SECTIONS ---------- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 50px;
+        }
+
+        /* ---------- GLASS EFFECT ---------- */
+        .glass {
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            border: 3px solid rgba(0, 114, 255, 0.6);
+            outline: 3px solid rgba(255, 110, 196, 0.5);
+            outline-offset: 8px;
+            transition: 0.4s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 114, 255, 0.8);
+        }
+
+        /* ---------- PROFILE ---------- */
+        .profile {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            border: 4px solid #0072ff;
+            outline: 3px solid #ff6ec4;
+            outline-offset: 6px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+
+        p {
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* ---------- GRID ---------- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
+            border: 3px solid rgba(0, 114, 255, 0.7);
+            outline: 2px solid rgba(255, 110, 196, 0.5);
+            outline-offset: 6px;
+        }
+
+        .box:hover {
+            transform: scale(1.12) translateY(-12px);
+            box-shadow: 0 0 35px rgba(0, 114, 255, 0.8);
+        }
+
+        .cert-link {
+            display: block;
+            font-weight: bold;
+            color: #0072ff;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .cert-link:hover {
+            color: #ff6ec4;
+        }
+
+        .link-text {
+            display: block;
+            font-weight: bold;
+            color: #0072ff;
+            margin-top: 5px;
+            text-decoration: none;
+        }
+
+        .link-text:hover {
+            color: #ff6ec4;
+        }
+
+        /* ---------- MOBILE RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            nav {
+                gap: 15px;
+                padding: 10px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 14px;
+                padding: 5px 10px;
+            }
+
+            section {
+                padding: 80px 10px 30px;
+            }
+
+            .glass {
+                width: 95%;
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .profile {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 15px;
+            }
+
+            h1,
+            h2,
+            h3 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .box {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .resume-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                gap: 10px;
+                padding: 8px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+
+            section {
+                padding: 70px 5px 20px;
+            }
+
+            .glass {
+                width: 98%;
+                padding: 15px;
+                margin: 0 5px;
+            }
+
+            .profile {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 10px;
+            }
+
+            h1,
+            h2,
+            h3 {
+                font-size: 1.3em;
+                margin-bottom: 8px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .box {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .resume-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#home">🏠 Home</a>
+        <a href="#about">👩‍💻 About</a>
+        <a href="#skills">🛠 Skills</a>
+        <a href="#tools">⚙ Tools</a>
+        <a href="#education">🎓 Education</a>
+        <a href="#projects">💼 Projects</a>
+        <a href="#internship">🏢 Internship</a>
+        <a href="#certifications">📜 Certifications</a>
+        <a href="#contact">📞 Contact</a>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home">
+        <div class="glass">
+            <img src="professional photo.png" class="profile">
+            <h1>Rasheeqa Sabreen</h1>
+            <p>Frontend Developer | Web Designer | Passionate Learner 🚀</p>
+            <a href="rasheeqa-resume.pdf" download class="resume-btn">📄 Download Resume</a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="glass">
+            <h2>👩‍💻 About Me</h2>
+            <p>
+                Aspiring Software Developer with internship experience in Front-End Development and Web Development.
+                Proficient in C, C++, and basic Python and Java.
+                Strong problem-solving, communication, and creative-thinking skills with a passion for learning new
+                technologies and building innovative solutions.
+                Eager to contribute to dynamic projects and continuously enhance technical expertise.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="glass">
+            <h2>🧠 Skills</h2>
+            <div class="grid">
+                <div class="box">C</div>
+                <div class="box">C++</div>
+                <div class="box">Python 🐍</div>
+                <div class="box">HTML 🌐</div>
+                <div class="box">CSS 🎨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="tools">
+        <div class="glass">
+            <h2>⚙ Tools</h2>
+            <div class="grid">
+                <div class="box">🔧 Git</div>
+                <div class="box">🔧 GitHub</div>
+                <div class="box">🖥️ VS Code</div>
+                <div class="box">🎨 Figma</div>
+                <div class="box">🎨 Canva</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="glass">
+            <h2>🎓 Education</h2>
+            <div class="grid">
+                <div class="box">
+                    <h3>🎓 B.Tech – AI & DS</h3>
+                    <p>Achariya College of Engineering Technology</p>
+                    <p>Pursuing</p>
+                </div>
+
+                <div class="box">
+                    <h3>🏫 Higher Secondary</h3>
+                    <p>Immaculate Heart of Mary Girls Higher Secondary School</p>
+                </div>
+
+                <div class="box">
+                    <h3>🏫 Primary Education</h3>
+                    <p>Amalorpavam Higher Secondary School</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS - FIXED -->
+    <section id="projects">
+        <div class="glass">
+            <h2>🚀 Projects</h2>
+            <div class="grid">
+                <div class="box">🔐 Fingerprint Lock System</div>
+                <div class="box">👀 Peek-a-Boo</div>
+                <div class="box">🌍 Front-End Page</div>
+                <div class="box">🎙️ Voice Assistant</div>
+                <div class="box">🗨️ AI Chatbot</div>
+                <div class="box">🤖 AI Resume Screening</div>
+                <div class="box">📜 Digital Certificate Verification</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERNSHIP -->
+    <section id="internships">
+        <div class="glass">
+            <h2>💼 Internships</h2>
+            <div class="grid">
+                <div class="box">💻 Frontend Developer Intern</div>
+                <div class="box">🌐 Web Development Intern</div>
+                <div class="box">☕ Java Programmer Intern</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+        <div class="glass">
+            <h2>🏆 Certifications</h2>
+            <div class="grid">
+                <div class="box">
+                    <h3>🤖 Digital Productivity in AI</h3>
+                    <a href="Ai productivity.pdf" class="cert-link" target="_blank">📜 View Certificate</a>
+                </div>
+                <div class="box">
+                    <h3>🤖 IBM – Getting Started with Artificial Intelligence</h3>
+                    <a href="IBM .pdf" class="cert-link" target="_blank">📜 View Certificate</a>
+                </div>
+                <div class="box">
+                    <h3>🤖 UI Path</h3>
+                    <a href="UI path.pdf" class="cert-link" target="_blank">📜 View Certificate</a>
+                </div>
+                <div class="box">
+                    <h3>🗄 MongoDB</h3>
+                    <a href="MongoDB.pdf" class="cert-link" target="_blank">📜 View Certificate</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="glass">
+            <h2>📬 Contact</h2>
+            <div class="grid">
+                <div class="box">📞 Phone<span class="link-text">+91 6369638907</span></div>
+                <div class="box">📧 Email<span class="link-text">rasheeqasabreen07@gmail.com</span></div>
+                <div class="box">🐙 GitHub<span class="link-text"
+                        onclick="window.open('https://github.com/rasheeqa3007', '_blank')">github.com/rasheeqa3007</span>
+                </div>
+                <div class="box">💼 LinkedIn<span class="link-text"
+                        onclick="window.open('https://www.linkedin.com/in/rasheeqa-sabreen-z/', '_blank')">linkedin.com/in/rasheeqa-sabreen</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
